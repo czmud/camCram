@@ -34,3 +34,6 @@ build/
 
 ### MacOS native .DS_Store ###
 **/.DS_Store
+
+#local text file for data curation
+/data_curation.txt
