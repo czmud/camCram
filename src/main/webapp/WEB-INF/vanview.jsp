@@ -13,24 +13,36 @@
 	<title>Cam Cram</title>
 </head>
 <body>
+	<div class="cmcrm-bg-royal-blue">
+	<div class="container d-flex justify-content-between align-items-center">
+		<div class="d-flex justify-content-start align-items-center">
+			<h2>CamCram</h2>
+			<img class="mx-3" src="/assets/navbar/cam-r.png" alt="cam" style="height: 30px"/>
+		</div>
+		<a class="btn btn-dark my-2 rounded p-1" href="/climbers/log-climber-out" role="button">Logout</a>
+	</div>
+	</div>
+
 
 <div class="container">
-	<div class="d-flex">
-	<h2><c:out value="${ climber.firstName }"/>'s Van</h2>
-	<a class="mx-2" href="/climbers/log-climber-out">Logout</a><br>
+	<div class="d-flex justify-content-between">
+		<div class="d-flex align-items-center">
+			<h3 class="my-2"><c:out value="${ climber.firstName }"/>'s Van</h3>
+			<p class="m-3"> Total weight: <c:out value="${ climber.van.displayTotalWeight() }"/>
+				(<c:out value="${ climber.van.displayTotalWeightImperial() }"/> )
+			</p>
+		</div>
+		<div class="d-flex align-items-center">
+			<button class="btn-danger my-2 rounded px-1" onclick="showHideRemoveButton(this)">edit</button>
+		</div>
 	</div>
-	<hr>
-	<h2>Gear in Your Van:</h2>
-	<p> Total weight: <c:out value="${ climber.van.displayTotalWeight() }"/>
-		(<c:out value="${ climber.van.displayTotalWeightImperial() }"/> )
-	</p>
+	<hr class="my-2">
 	<div class="d-flex">
 		<div class="col">
-			<div class="d-flex">
-				<button class="btn-danger rounded p-1" onclick="showHideRemoveButton(this)">edit</button>
-				<h5>Protection (<c:out value="${ climber.van.displayProtectionsWeight() }"/>)</h5>
+			<div class="d-flex align-items-center">
+				<h5 class="mx-2">Protection (<c:out value="${ climber.van.displayProtectionsWeight() }"/>)</h5>
 			</div>
-			<div id="van-cams" class="p-2 d-flex" style="width: 400px; background-color: darkseagreen">
+			<div id="van-cams" class="p-2 d-flex" style="width: 400px; min-height: 86px; background-color: darkseagreen">
 			</div>
 			<div id="van-stoppers" class="p-2 d-flex" style="width: 400px; background-color: darkseagreen">
 			</div>
@@ -41,23 +53,23 @@
 			<div class="d-flex">
 				<h5>Belay Devices (<c:out value="${ climber.van.displayBelayDevicesWeight() }"/>)</h5>
 			</div>
-			<div id="van-belay-devices" class="p-2 d-flex" style="width: 400px; background-color: darkseagreen">
+			<div id="van-belay-devices" class="p-2 d-flex" style="width: 400px; min-height: 114px; background-color: darkseagreen">
 			</div>
 		</div>
 		<div class="col">
 			<div class="d-flex">
 				<h5>Quick Draws (<c:out value="${ climber.van.displayDrawsWeight() }"/>)</h5>
 			</div>
-			<div id="van-draws" class="p-2 d-flex" style="width: 400px; background-color: darkseagreen">
+			<div id="van-draws" class="p-2 d-flex" style="width: 400px; min-height: 114px; background-color: darkseagreen">
 			</div>
 		</div>
 	</div>
-		<hr>
+		<hr class="my-3">
 	<div class="d-flex">
 		
 		
 		<div class="col mx-2">
-		<h2>Gear Shop</h2>
+		<h3 class="mb-3">Gear Shop</h3>
 	
 			
 		
