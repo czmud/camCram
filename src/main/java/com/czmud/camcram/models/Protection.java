@@ -11,12 +11,14 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.czmud.camcram.abstractModels.Gear;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "protections")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "protection_type", discriminatorType = DiscriminatorType.INTEGER)
 public class Protection extends Gear {
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "protection")
 	private List<ProtectionsInVan> protectionsInVans;
 
@@ -40,6 +42,10 @@ public class Protection extends Gear {
 
 	public double getSafeMaxRange() {
 		return this.maxRange;
+	}
+	
+	public double getNominalRange() {
+		return (this.getSafeMaxRange() + this.getSafeMinRange()) / 2;
 	}
 
 	// GETTERS & SETTERS

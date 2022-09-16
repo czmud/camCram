@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="manufacturers")
 public class Manufacturer {
@@ -34,10 +36,12 @@ public class Manufacturer {
 	@Size(max=3, message="Abbreviation must be 3 characters or less")
 	private String abbreviation;
 	
+	@JsonIgnore
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonIgnore
+	@DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
 
 	public Manufacturer() {

@@ -54,7 +54,7 @@ public class VanController {
 		return "redirect:/van";
 	}
 	
-	@PutMapping("remove-protection-from-van/{protectionsInVanId}")
+	@PutMapping("/remove-protection-from-van/{protectionsInVanId}")
 	public String removeProtectionFromVan( @PathVariable("protectionsInVanId") Long protectionsInVanId,
 										   HttpSession session) {
 		

@@ -34,7 +34,7 @@ public class VanService {
 	@Autowired 
 	private BelayDevicesInVanRepository belayDevicesInVanRepository;
 	
-	public void addProtectionToVan( Van updateVan, Long protectionId ) {
+	public ProtectionsInVan addProtectionToVan( Van updateVan, Long protectionId ) {
 		
 		// search to see if same piece of protection is already in climbers van
 		// if found, increment counter
@@ -42,15 +42,14 @@ public class VanService {
 		if( checkForExisting.isPresent() ) {
 			ProtectionsInVan updateProtectionsInVan = checkForExisting.get();
 			updateProtectionsInVan.setCount( updateProtectionsInVan.getCount() + 1 );
-			protectionsInVanRepository.save( updateProtectionsInVan );
-			return;
+			return protectionsInVanRepository.save( updateProtectionsInVan );
 		}
 		
 		// else if not existing
 		// verify valid protection id was given
 		Optional<Protection> checkForProtection = protectionRepository.findById( protectionId );
 		if( checkForProtection.isEmpty() ) {
-			return;
+			return null;
 		}
 
 		Protection addProtection = checkForProtection.get();
@@ -60,27 +59,29 @@ public class VanService {
 		addProtectionsInVan.setProtection(addProtection);
 		addProtectionsInVan.setVan(updateVan);
 		
-		protectionsInVanRepository.save( addProtectionsInVan );
+		return protectionsInVanRepository.save( addProtectionsInVan );
 		
 	}
 	
-	public void removeProtectionFromVan( Long protectionsInVanId ) {
+	public ProtectionsInVan removeProtectionFromVan( Long protectionsInVanId ) {
 		
 		Optional<ProtectionsInVan> checkForExisting = protectionsInVanRepository.findById( protectionsInVanId );
 		if( checkForExisting.isEmpty() ) {
-			return;
+			return null;
 		}
 		ProtectionsInVan updateProtectionsInVan = checkForExisting.get();
+		
 		if(updateProtectionsInVan.getCount() <= 1) {
 			protectionsInVanRepository.delete(updateProtectionsInVan);
-			return;
+			updateProtectionsInVan.setCount(0);
+			return updateProtectionsInVan;
 		}
 		
 		updateProtectionsInVan.setCount( updateProtectionsInVan.getCount() - 1 );
-		protectionsInVanRepository.save( updateProtectionsInVan );
+		return protectionsInVanRepository.save( updateProtectionsInVan );
 	}
 	
-	public void addBelayDeviceToVan( Van updateVan, Long belayDeviceId ) {
+	public BelayDevicesInVan addBelayDeviceToVan( Van updateVan, Long belayDeviceId ) {
 		
 		// search to see if same belayDevice is already in climbers van
 		// if found, increment counter
@@ -88,15 +89,14 @@ public class VanService {
 		if( checkForExisting.isPresent() ) {
 			BelayDevicesInVan updateBelayDevicesInVan = checkForExisting.get();
 			updateBelayDevicesInVan.setCount( updateBelayDevicesInVan.getCount() + 1 );
-			belayDevicesInVanRepository.save( updateBelayDevicesInVan );
-			return;
+			return belayDevicesInVanRepository.save( updateBelayDevicesInVan );
 		}
 		
 		// else if not existing
 		// verify valid belayDevice id was given
 		Optional<BelayDevice> checkForBelayDevice = belayDeviceRepository.findById( belayDeviceId );
 		if( checkForBelayDevice.isEmpty() ) {
-			return;
+			return null;
 		}
 
 		BelayDevice addBelayDevice = checkForBelayDevice.get();
@@ -106,27 +106,29 @@ public class VanService {
 		addBelayDevicesInVan.setBelayDevice(addBelayDevice);
 		addBelayDevicesInVan.setVan(updateVan);
 		
-		belayDevicesInVanRepository.save( addBelayDevicesInVan );
+		return belayDevicesInVanRepository.save( addBelayDevicesInVan );
 		
 	}
 	
-	public void removeBelayDeviceFromVan( Long belayDevicesInVanId ) {
+	public BelayDevicesInVan removeBelayDeviceFromVan( Long belayDevicesInVanId ) {
 		
 		Optional<BelayDevicesInVan> checkForExisting = belayDevicesInVanRepository.findById( belayDevicesInVanId );
 		if( checkForExisting.isEmpty() ) {
-			return;
+			return null;
 		}
 		BelayDevicesInVan updateBelayDevicesInVan = checkForExisting.get();
+		
 		if(updateBelayDevicesInVan.getCount() <= 1) {
 			belayDevicesInVanRepository.delete(updateBelayDevicesInVan);
-			return;
+			updateBelayDevicesInVan.setCount(0);
+			return updateBelayDevicesInVan;
 		}
 		
 		updateBelayDevicesInVan.setCount( updateBelayDevicesInVan.getCount() - 1 );
-		belayDevicesInVanRepository.save( updateBelayDevicesInVan );
+		return belayDevicesInVanRepository.save( updateBelayDevicesInVan );
 	}
 	
-	public void addDrawToVan( Van updateVan, Long drawId ) {
+	public DrawsInVan addDrawToVan( Van updateVan, Long drawId ) {
 		
 		// search to see if same piece of draw is already in climbers van
 		// if found, increment counter
@@ -134,15 +136,14 @@ public class VanService {
 		if( checkForExisting.isPresent() ) {
 			DrawsInVan updateDrawsInVan = checkForExisting.get();
 			updateDrawsInVan.setCount( updateDrawsInVan.getCount() + 1 );
-			drawsInVanRepository.save( updateDrawsInVan );
-			return;
+			return drawsInVanRepository.save( updateDrawsInVan );
 		}
 		
 		// else if not existing
 		// verify valid draw id was given
 		Optional<Draw> checkForDraw = drawRepository.findById( drawId );
 		if( checkForDraw.isEmpty() ) {
-			return;
+			return null;
 		}
 
 		Draw addDraw = checkForDraw.get();
@@ -152,23 +153,24 @@ public class VanService {
 		addDrawsInVan.setDraw(addDraw);
 		addDrawsInVan.setVan(updateVan);
 		
-		drawsInVanRepository.save( addDrawsInVan );
+		return drawsInVanRepository.save( addDrawsInVan );
 		
 	}
 	
-	public void removeDrawFromVan( Long drawsInVanId ) {
+	public DrawsInVan removeDrawFromVan( Long drawsInVanId ) {
 		
 		Optional<DrawsInVan> checkForExisting = drawsInVanRepository.findById( drawsInVanId );
 		if( checkForExisting.isEmpty() ) {
-			return;
+			return null;
 		}
 		DrawsInVan updateDrawsInVan = checkForExisting.get();
 		if(updateDrawsInVan.getCount() <= 1) {
 			drawsInVanRepository.delete(updateDrawsInVan);
-			return;
+			updateDrawsInVan.setCount(0);
+			return updateDrawsInVan;
 		}
 		
 		updateDrawsInVan.setCount( updateDrawsInVan.getCount() - 1 );
-		drawsInVanRepository.save( updateDrawsInVan );
+		return drawsInVanRepository.save( updateDrawsInVan );
 	}
 }

@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="protections_in_vans")
 public class ProtectionsInVan {
@@ -26,22 +28,25 @@ public class ProtectionsInVan {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonIgnore
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name= "van_id")
 	private Van van;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name= "protection_id")
 	private Protection protection;
 	
 	private int count;
 	
+	@JsonIgnore
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonIgnore
+	@DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
 	
 	public ProtectionsInVan() {}

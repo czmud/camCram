@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.czmud.camcram.models.Manufacturer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
 public abstract class Gear {
@@ -27,7 +28,7 @@ public abstract class Gear {
 	private Long id;
 	
 	@NotNull
-	@ManyToOne( fetch = FetchType.LAZY )
+	@ManyToOne( fetch = FetchType.EAGER )
 	@JoinColumn( name = "manufacturer_id" )
 	private Manufacturer manufacturer;
 	
@@ -45,10 +46,15 @@ public abstract class Gear {
 	
 	private String color;
 	
+	private String imageUrl;
+	
+
+	@JsonIgnore
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonIgnore
+	@DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
 	
 	public Gear() {}
@@ -127,4 +133,11 @@ public abstract class Gear {
 		this.color = color;
 	}
 	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

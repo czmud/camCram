@@ -1,0 +1,12 @@
+.pro-group:hover span.pro-hover{
+	display:block;
+	z-index:9;
+}
+
+.pro-group:hover {
+	background: yellow;
+}
+
+span.pro-hover{
+	display:none;
+}
