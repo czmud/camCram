@@ -7,34 +7,53 @@
 <head>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<title>Cam Cram</title>
 </head>
-<body class="container">
-	<div class="d-flex justify-content-between bg-info align-items-center">
-		<h1>CamCram</h1>
+<body>
+	<div class="cmcrm-bg-royal-blue">
+	<div class="container d-flex justify-content-start align-items-center">
+		<div class="d-flex justify-content-start align-items-center">
+			<h2>CamCram</h2>
+			<img class="mx-3" src="/assets/navbar/cam-r.png" alt="cam" style="height: 30px"/>
+		</div>
 	</div>
-	
-	<h2>Log In</h2>
-		<table>
+	</div>
+	<div class="d-flex flex-column align-items-center">
+	<h3 class="m-4">Log In</h3>
+		<div class="d-flex justify-content-center">
 		<form:form action="/climbers/log-climber-in" method="post" modelAttribute="newLoginClimber">
-			<tr>
-				<td><form:label path="email">Email:</form:label></td>
-				<td><form:input path="email"/></td>
-				<td><form:errors class="text-danger" path="email"/></td>
-			</tr>
-			<tr>
-				<td><form:label path="password">Password:</form:label></td>
-				<td><form:input path="password" type="password"/></td>
-				<td><form:errors class="text-danger" path="password"/></td>
-			</tr>			
-			<tr>
-				<td><input type="submit" value="Login"></td>
-			</tr>			
+			<div class="form-group row my-1">
+				<form:label class="col-sm-3 col-form-label py-1" path="email">Email:</form:label>
+				<div class="col-sm-9">
+					<form:input path="email"/>
+				</div>
+			</div>
+			<div class="form-group row my-1">
+				<form:errors class="text-danger" path="email"/>
+			</div>
+			<div class="form-group row my-2">
+				<form:label class="col-sm-3 py-1 col-form-label py-1" path="password">Password:</form:label>
+				<div class="col-sm-9">
+					<form:input path="password" type="password"/>
+				</div>
+			</div>
+			<div class="form-group row my-2">
+				<form:errors class="text-danger" path="password"/>
+			</div>			
+			<div class="form-group row my-1 d-flex justify-content-end">
+				<div class="col-sm-4">
+					<button type="submit" class="btn btn-dark">Login</button>
+				</div>
+			</div>			
 		</form:form>
-		</table>
+		</div>
 	
-	<br><p>Don't have an account?</p>
-	<a href="/register">Register New Climber</a>
+	<p class="m-4">
+		New to CamCram?
+		<a href="/register">Create Account</a>
+	</p>
+	</div>
 	
 </body>
 </html>
