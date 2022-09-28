@@ -4,11 +4,11 @@ let drawsInVans;
 let showRemoveButton = false;
 
 async function onPageLoad(){
-	let protectionsResponse = await fetch("http://localhost:8080/api/van/protections-in-van");
+	let protectionsResponse = await fetch("http://localhost:9090/api/van/protections-in-van");
 	protectionsInVans = await protectionsResponse.json();
-	let belayDevicesResponse = await fetch("http://localhost:8080/api/van/belay-devices-in-van");
+	let belayDevicesResponse = await fetch("http://localhost:9090/api/van/belay-devices-in-van");
 	belayDevicesInVans = await belayDevicesResponse.json();
-	let drawsResponse = await fetch("http://localhost:8080/api/van/draws-in-van");
+	let drawsResponse = await fetch("http://localhost:9090/api/van/draws-in-van");
 	drawsInVans = await drawsResponse.json();
 	
 	sortGear( getNominalRange, protectionsInVans );
@@ -178,7 +178,7 @@ async function addProtectionToVan( protectionId ){
 	let formData = new FormData();
 	formData.append("protectionId", protectionId);
 		
-	let response = await fetch("http://localhost:8080/api/van/add-protection-to-van", { method:'POST', body: formData });
+	let response = await fetch("http://localhost:9090/api/van/add-protection-to-van", { method:'POST', body: formData });
 	let newProtectionsInVan = await response.json();
 		
 	if( ! newProtectionsInVan ){
@@ -206,7 +206,7 @@ async function removeProtectionFromVan( protectionsInVanId ){
 	let formData = new FormData();
 	formData.append("protectionsInVanId", protectionsInVanId);
 		
-	let response = await fetch("http://localhost:8080/api/van/remove-protection-from-van", { method: 'PUT', body: formData })
+	let response = await fetch("http://localhost:9090/api/van/remove-protection-from-van", { method: 'PUT', body: formData })
 	let removedProtectionsInVan = await response.json();
     
     if( ! removedProtectionsInVan ){
@@ -239,7 +239,7 @@ async function addBelayDeviceToVan( belayDeviceId ){
 	let formData = new FormData();
 	formData.append("belayDeviceId", belayDeviceId);
 		
-	let response = await fetch("http://localhost:8080/api/van/add-belay-device-to-van", { method:'POST', body: formData });
+	let response = await fetch("http://localhost:9090/api/van/add-belay-device-to-van", { method:'POST', body: formData });
 	let newBelayDevicesInVan = await response.json();
 		
 	if( ! newBelayDevicesInVan ){
@@ -266,7 +266,7 @@ async function removeBelayDeviceFromVan( belayDevicesInVanId ){
 	let formData = new FormData();
 	formData.append("belayDevicesInVanId", belayDevicesInVanId);
 		
-	let response = await fetch("http://localhost:8080/api/van/remove-belay-device-from-van", { method: 'PUT', body: formData })
+	let response = await fetch("http://localhost:9090/api/van/remove-belay-device-from-van", { method: 'PUT', body: formData })
 	let removedBelayDevicesInVan = await response.json();
     
     if( ! removedBelayDevicesInVan ){
@@ -298,7 +298,7 @@ async function addDrawToVan( drawId ){
 	let formData = new FormData();
 	formData.append("drawId", drawId);
 		
-	let response = await fetch("http://localhost:8080/api/van/add-draw-to-van", { method:'POST', body: formData });
+	let response = await fetch("http://localhost:9090/api/van/add-draw-to-van", { method:'POST', body: formData });
 	let newDrawsInVan = await response.json();
 		
 	if( ! newDrawsInVan ){
@@ -325,7 +325,7 @@ async function removeDrawFromVan( drawsInVanId ){
 	let formData = new FormData();
 	formData.append("drawsInVanId", drawsInVanId);
 		
-	let response = await fetch("http://localhost:8080/api/van/remove-draw-from-van", { method: 'PUT', body: formData })
+	let response = await fetch("http://localhost:9090/api/van/remove-draw-from-van", { method: 'PUT', body: formData })
 	let removedDrawsInVan = await response.json();
     
     if( ! removedDrawsInVan ){
