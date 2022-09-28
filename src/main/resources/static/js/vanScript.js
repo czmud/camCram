@@ -47,28 +47,34 @@ function populateProtectionsInVan( protectionsInVans ){
 	miscElement.innerHTML = "";
 		
 	for( let onePro of protectionsInVans ){
-			stringHTML += "<div class='pro-group'>"
-				+"<button class='btn-danger rounded-circle px-2 remove-pro'"
-				+( showRemoveButton ? "" : "style='display:none'" )
-				+" onclick='removeProtectionFromVan("
-				+onePro.id
-				+")'>-</button>";
-			for(let i = 0; i<onePro.count; i++){				
 				stringHTML +=
-						"<img src="
-						+(onePro.protection.imageUrl ?
-						onePro.protection.imageUrl
-						:
-						"'/assets/placeholders/"+onePro.type+".png'"
-						)
-						+" alt='pro img' style='height: 100px'>";
-			}
-			stringHTML +="<span class='pro-hover' >"
-				+onePro.protection.manufacturer.abbreviation+" "
-				+onePro.protection.name
-				+((onePro.count > 1 ? " ("+onePro.count+"x)" : " "))
-				+"</span>"
-				+"</div>";
+			"<div class='pro-group'>"
+				// +"<button class='btn-danger rounded-circle px-2 remove-pro'"
+				// 	+( showRemoveButton ? "" : "style='display:none'" )
+				// 	+" onclick='removeProtectionFromVan("+onePro.id+")'"
+				// 	+">"
+				// 		+"-"
+				// +"</button>"
+				+"<div class='pro-group-items'>";
+					for(let i = 0; i<onePro.count; i++){				
+						stringHTML +=
+								"<img src="
+								+(onePro.protection.imageUrl ?
+								onePro.protection.imageUrl
+								:
+								"'/assets/placeholders/"+onePro.type+".png'"
+								)
+								+" alt='pro img' style='height: 100px; position: absolute'>";
+					}
+					stringHTML +=
+				"</div>";
+					stringHTML +=
+				// "<span class='pro-hover'>"
+				// 	+onePro.protection.manufacturer.abbreviation+" "
+				// 	+onePro.protection.name
+				// 	+((onePro.count > 1 ? " ("+onePro.count+"x)" : " "))
+				// +"</span>"
+			+"</div>";
 		
 		if( onePro.type === 'cam'){
 			camElement.innerHTML += stringHTML;

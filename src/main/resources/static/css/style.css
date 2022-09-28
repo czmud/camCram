@@ -1,16 +1,27 @@
-.pro-group:hover span.pro-hover{
-	display:block;
-	z-index:9;
+.cmcrm-bg-royal-blue{
+	background: #546DFF;
 }
 
-.pro-group:hover {
+.pro-hover:hover span.pro-hover{
+	display: absolute;
+	z-index: 9;
+}
+
+.pro-hover:hover {
 	background: yellow;
 }
 
 span.pro-hover{
-	display:none;
+	display: none;
 }
 
-.cmcrm-bg-royal-blue{
-	background: #546DFF;
+
+.pro-group-items{
+	display: relative;
+	height: 100px;
+	min-width: 50px;
+}
+
+.pro-group-items > *{
+	display: absolute;
 }
