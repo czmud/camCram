@@ -48,11 +48,17 @@
 			</div>			
 		</form:form>
 		</div>
-	
 	<p class="m-4">
 		New to CamCram?
 		<a href="/register">Create Account</a>
 	</p>
+	<div class="m-4">
+		<form action="/climbers/log-climber-in" method="post">
+			<input type="hidden" name="email" value="guestaccount@mail.com">
+			<input type="hidden" name="password" value="password">
+			<button type="submit" class="btn btn-dark">Continue as Guest</button>
+		</form>
+	</div>
 	</div>
 	
 </body>
