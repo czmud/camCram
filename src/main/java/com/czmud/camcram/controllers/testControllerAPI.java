@@ -1,5 +1,6 @@
 package com.czmud.camcram.controllers;
 
+import java.lang.management.MemoryUsage;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.czmud.camcram.apiModels.ProtectionSerializer;
+import com.czmud.camcram.diagnostics.MemoryUseTest;
 import com.czmud.camcram.models.Climber;
 import com.czmud.camcram.models.ProtectionsInVan;
 import com.czmud.camcram.models.Van;
@@ -22,6 +24,22 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 public class testControllerAPI {
 	@Autowired
 	private ClimberService climberService;
+	
+	@GetMapping(value="api/memory-usage/heap")
+	public MemoryUsage testHeapMemoryUse() {
+		MemoryUseTest memoryUseTest = new MemoryUseTest();
+		MemoryUsage testResponse = memoryUseTest.testHeapMemory();
+		
+		return testResponse;
+	}
+	
+	@GetMapping(value="api/memory-usage/non-heap")
+	public MemoryUsage testNonHeapMemoryUse() {
+		MemoryUseTest memoryUseTest = new MemoryUseTest();
+		MemoryUsage testResponse = memoryUseTest.testNonHeapMemory();
+		
+		return testResponse;
+	}
 	
 	@GetMapping(value="api/testing")
 	public String testAPI(HttpSession session) throws JsonProcessingException {
